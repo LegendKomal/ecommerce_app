@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/auth/auth_cubit.dart';
+import 'package:ecommerce_app/auth/sing_up.dart';
 import 'package:ecommerce_app/dio/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -127,7 +128,12 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SingUp()),
+                );
+                          },
                           child: const Text('Register'),
                         ),
                       ),

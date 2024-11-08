@@ -17,48 +17,52 @@ class _SingUpState extends State<SingUp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> registerUser(BuildContext context) async {
-    final username = usernameController.text.trim();
-    final password = passwordController.text.trim();
+  final username = usernameController.text.trim();
+  final password = passwordController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Username and password cannot be empty')),
-      );
-      return;
-    }
+  if (username.isEmpty || password.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Username and password cannot be empty')),
+    );
+    return;
+  }
 
-    try {
-      final url = Uri.parse('https://fakestoreapi.com/auth/register');
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'username': username, 'password': password}),
-      );
+  try {
+    final url = Uri.parse('https://fakestoreapi.com/auth/login');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username, 'password': password}),
+    );
+    
+    print('Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['token'] != null) {
-          context.read<AuthCubit>().login(data['token']);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Registration successful!')),
-          );
-          Navigator.pop(context); // Redirect to previous screen or login
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Registration failed, please try again.')),
-          );
-        }
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['token'] != null) {
+        context.read<AuthCubit>().login(data['token']);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Registration successful!')),
+        );
+        Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registration failed. Please try again.')),
+          const SnackBar(content: Text('Registration failed, please try again.')),
         );
       }
-    } catch (e) {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred. Please try again later. ${e.toString()}')),
+        const SnackBar(content: Text('Registration failed. Please try again.')),
       );
     }
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('An error occurred. Please try again later. ${e.toString()}')),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
