@@ -1,16 +1,24 @@
-# ecommerce_app
+Ecommerce App
+An eCommerce application built using Flutter. This project serves as a starting point for a comprehensive eCommerce app, enabling functionalities such as product listing, user authentication, cart management, and more.
 
-A new Flutter project.
+Features
+Product Catalog: Browse and search products.
+Authentication: User login and registration.
+Shopping Cart: Add/remove products, view cart.
+Order History: View past purchases.
+Getting Started
 
-## Getting Started
+Clone Repository:
 
-This project is a starting point for a Flutter application.
+bash
+Copy code
+git clone https://github.com/LegendKomal/ecommerce_app.git
+Dependencies:
+Run flutter pub get to install dependencies.
 
-A few resources to get you started if this is your first Flutter project:
+Run App:
+Execute flutter run to start the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Resources
+Flutter Documentation
+Dart Language
